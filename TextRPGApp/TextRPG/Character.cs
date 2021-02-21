@@ -10,6 +10,7 @@ namespace TextRPG
     {
         private Gender genderChosen;
         private Race raceChosen;
+        private int hitPoints;
 
         /// <summary>
         /// Gets and sets the character name.
@@ -63,7 +64,29 @@ namespace TextRPG
         }
 
         /// <summary>
-        /// Initializes the character with the specified gender, race and name.
+        /// Gets and sets the character's hit points.
+        /// </summary>
+        public int HitPoints
+        {
+            get
+            {
+                return this.hitPoints;
+            }
+
+            set
+            {
+                if(value < 0)
+                {
+                    throw new ArgumentOutOfRangeException("The value cannot be lesser than 0.");
+                }
+
+                this.hitPoints = value;
+            }
+        }
+
+        /// <summary>
+        /// Initializes the character with the specified gender, race, name
+        /// and hit points to 50.
         /// </summary>
         /// <param name="genderChosen">The character's gender.</param>
         /// <param name="raceChosen">The character's race.</param>
@@ -73,6 +96,29 @@ namespace TextRPG
             this.GenderChosen = genderChosen;
             this.RaceChosen = raceChosen;
             this.Name = name;
+            this.hitPoints = 50;
+        }
+
+        /// <summary>
+        /// Initializes the character with the specified gender, race, name
+        /// and hit points.
+        /// </summary>
+        /// <param name="genderChosen">The character's gender.</param>
+        /// <param name="raceChosen">The character's race.</param>
+        /// <param name="name">The character's name.</param>
+        public Character(Gender genderChosen, Race raceChosen, string name, int hitPoints)
+        {
+            this.GenderChosen = genderChosen;
+            this.RaceChosen = raceChosen;
+            this.Name = name;
+            this.HitPoints = hitPoints;
+        }
+
+        public override string ToString()
+        {
+            return this.Name + " is a " 
+                + this.GenderChosen + " " 
+                + this.RaceChosen;
         }
     }
 }
