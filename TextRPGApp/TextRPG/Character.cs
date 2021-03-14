@@ -15,7 +15,7 @@ namespace TextRPG
         /// <summary>
         /// Gets and sets the character name.
         /// </summary>
-        public string Name
+        protected string Name
         {
             get;
             set;
@@ -24,7 +24,10 @@ namespace TextRPG
         /// <summary>
         /// Gets and sets the gender chosen.
         /// </summary>
-        public Gender GenderChosen
+        /// <exception cref="InvalidEnumArgumentException">
+        /// Occurs when the enumerator is not valid.
+        /// </exception>
+        protected Gender GenderChosen
         {
             get
             {
@@ -45,7 +48,10 @@ namespace TextRPG
         /// <summary>
         /// Gets and sets the race chosen.
         /// </summary>
-        public Race RaceChosen
+        /// <exception cref="InvalidEnumArgumentException">
+        /// Occurs when the enumerator is not valid. 
+        /// </exception>
+        protected Race RaceChosen
         {
             get
             {
@@ -66,7 +72,10 @@ namespace TextRPG
         /// <summary>
         /// Gets and sets the character's hit points.
         /// </summary>
-        public int HitPoints
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Occurs when the hit points are set to a value less than 0.
+        /// </exception>
+        protected int HitPoints
         {
             get
             {
@@ -114,6 +123,12 @@ namespace TextRPG
             this.HitPoints = hitPoints;
         }
 
+        /// <summary>
+        /// Returns a string representation of a character's name, gender and race.
+        /// </summary>
+        /// <returns>
+        /// A string representation of a character's name, gender and race.
+        /// </returns>
         public override string ToString()
         {
             return this.Name + " is a " 
