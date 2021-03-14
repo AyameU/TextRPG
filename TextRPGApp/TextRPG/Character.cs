@@ -13,6 +13,11 @@ namespace TextRPG
         private int hitPoints;
 
         /// <summary>
+        /// Occurs when the character's hit points are less than or equal to zero.
+        /// </summary>
+        public event EventHandler CharacterDeath;
+
+        /// <summary>
         /// Gets and sets the character name.
         /// </summary>
         protected string Name
@@ -73,7 +78,7 @@ namespace TextRPG
         /// Gets and sets the character's hit points.
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// Occurs when the hit points are set to a value less than 0.
+        /// Occurs when the hit points are set to a value less than or equal to 0.
         /// </exception>
         protected int HitPoints
         {
@@ -84,9 +89,9 @@ namespace TextRPG
 
             set
             {
-                if(value < 0)
+                if(value <= 0)
                 {
-                    throw new ArgumentOutOfRangeException("The value cannot be lesser than 0.");
+                    throw new ArgumentOutOfRangeException("The value cannot be less than or equal to 0.");
                 }
 
                 this.hitPoints = value;
@@ -134,6 +139,17 @@ namespace TextRPG
             return this.Name + " is a " 
                 + this.GenderChosen + " " 
                 + this.RaceChosen;
+        }
+
+        /// <summary>
+        /// Raises the character death event.
+        /// </summary>
+        protected virtual void OnCharacterDeath()
+        {
+            if (CharacterDeath != null)
+            {
+                CharacterDeath(this, new EventArgs());
+            }
         }
     }
 }
