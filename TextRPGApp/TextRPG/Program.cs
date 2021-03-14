@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace TextRPG
 {
@@ -42,120 +43,64 @@ namespace TextRPG
         }
 
         /// <summary>
-        /// Creates a new character object.
+        /// Creates a new hero.
         /// </summary>
         static Hero NewHero()
         {
+            Hero hero = new Hero();
             string input;
 
             Console.WriteLine("\nIs your character female or male? Press 0 for female or 1 for male.");
             input = Console.ReadLine();
-            Gender gender = Gender.Female;
 
             try
             {
-                gender = ValidateGender(input);
+                hero.GenderChosen = (Gender)Int32.Parse(input);
+            }
+            catch (InvalidEnumArgumentException)
+            {
+                Console.WriteLine("You must choose 0 or 1.");
+            }
+
+            Console.WriteLine("\nChoose a race: Human (0), Elf (1) or Dwarf (2).");
+            input = Console.ReadLine();
+
+            try
+            {
+                hero.RaceChosen = (Race)Int32.Parse(input);
+            }
+            catch (InvalidEnumArgumentException)
+            {
+                Console.WriteLine("You must choose 0, 1 or 2.");
+            }
+
+            Console.WriteLine("\nChoose your character's name.");
+            hero.Name = Console.ReadLine();
+
+            Console.WriteLine("\nSet your character's hit points. Choose a value between 1 and 100.");
+
+            try
+            {
+                hero.HitPoints = Int32.Parse(Console.ReadLine());
             }
             catch (ArgumentOutOfRangeException)
             {
-                Console.WriteLine("You must choose 0 or 1.");
-                Console.WriteLine("\nIs your character female or male? Press 0 for female or 1 for male.");
-                input = Console.ReadLine();
+                Console.WriteLine("The value must be between 1 and 100.");
             }
-            catch (ArgumentNullException)
+
+            Console.WriteLine("\nChoose a class: Warrior (0), Mage (1), Rogue (2) or Cleric (3). ");
+            input = Console.ReadLine();
+
+            try
             {
-                Console.WriteLine("The value cannot be empty");
-                Console.WriteLine("\nIs your character female or male? Press 0 for female or 1 for male.");
-                input = Console.ReadLine();
+                hero.ClassChosen = (CharacterClass)Int32.Parse(input);
             }
-
-            Console.WriteLine("\nChoose a race: Human, Elf or Dwarf.");
-            input = Console.ReadLine();
-            Race race = (Race)Int32.Parse(input);
-
-            Console.WriteLine("\nChoose your character's name.");
-            string name = Console.ReadLine();
-
-            Console.WriteLine("\nSet your character's hit points.");
-            int hitPoints = Int32.Parse(Console.ReadLine());
-
-            Console.WriteLine("\nChoose a class: Warrior, Mage, Rogue or Cleric. ");
-            input = Console.ReadLine();
-            CharacterClass charClass = (CharacterClass)Int32.Parse(input);
-
-            Hero hero = new Hero(gender, race, name, hitPoints, charClass);
+            catch (InvalidEnumArgumentException)
+            {
+                Console.WriteLine("The value must be 0, 1, 2 or 3.");
+            }
 
             return hero;
         }
-
-        /// <summary>
-        /// Validates the character gender.
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns>The specified gender.</returns>
-        static Gender ValidateGender(string input)
-        {
-            int num = Int32.Parse(input);
-
-            if (num < 0 || num > 1)
-            {
-                throw new ArgumentOutOfRangeException("The input must be 0 or 1.");
-            }
-            if(input is null)
-            {
-                throw new ArgumentNullException("The input cannot be null.");
-            }
-            else
-            {
-                Gender gender = num == 0 ? Gender.Female : Gender.Male;
-
-                return gender;
-            }
-        }
-
-        /*
-        static Race SetRace(string input)
-        {
-            Race race;
-
-            switch (input)
-            {
-                case "human":
-                    race = Race.Human;
-                    break;
-                case "elf":
-                    race = Race.Elf;
-                    break;
-                case "dwarf":
-                    race = Race.Dwarf;
-                    break;
-            }
-
-            return race;
-        }
-
-        static CharClass SetCharClass(string input)
-        {
-            CharClass charClass;
-
-            switch(input)
-            {
-                case "warrior":
-                    charClass = CharClass.Warrior;
-                    break;
-                case "mage":
-                    charClass = CharClass.Mage;
-                    break;
-                case "rogue":
-                    charClass = CharClass.Rogue;
-                    break;
-                case "cleric":
-                    charClass = CharClass.Cleric;
-                    break;
-            }
-
-            return charClass;
-        }
-        */
     }
 }
