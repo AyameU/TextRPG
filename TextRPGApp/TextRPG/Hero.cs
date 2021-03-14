@@ -8,7 +8,7 @@ namespace TextRPG
     /// </summary>
     public class Hero : Character
     {
-        private CharacterClass charClass;
+        private CharacterClass characterClass;
 
         /// <summary>
         /// Gets and sets the hero's class.
@@ -20,7 +20,7 @@ namespace TextRPG
         {
             get
             {
-                return this.charClass;
+                return this.characterClass;
             }
 
             private set
@@ -30,7 +30,7 @@ namespace TextRPG
                     throw new InvalidEnumArgumentException("The value is not a valid enumeration.");
                 }
 
-                this.charClass = value;
+                this.characterClass = value;
             }
         }
 
@@ -38,27 +38,27 @@ namespace TextRPG
         /// Initializes a hero character with the specified gender, race, name, class 
         /// and with hit points set to 50.
         /// </summary>
-        public Hero(Gender genderChosen, Race raceChosen, string name, CharacterClass charClass) 
+        public Hero(Gender genderChosen, Race raceChosen, string name, CharacterClass characterClass) 
             : base(genderChosen, raceChosen, name)
         {
             this.GenderChosen = genderChosen;
             this.RaceChosen = raceChosen;
             this.Name = name;
-            this.ClassChosen = charClass;
+            this.ClassChosen = characterClass;
         }
 
         /// <summary>
         /// Initializes a hero character with the specified gender, race, name, class 
         /// and hit points.
         /// </summary>
-        public Hero(Gender genderChosen, Race raceChosen, string name, int hitPoints, CharacterClass charClass)
+        public Hero(Gender genderChosen, Race raceChosen, string name, int hitPoints, CharacterClass characterClass)
             : base(genderChosen, raceChosen, name, hitPoints)
         {
             this.GenderChosen = genderChosen;
             this.RaceChosen = raceChosen;
             this.Name = name;
             this.HitPoints = hitPoints;
-            this.ClassChosen = charClass;
+            this.ClassChosen = characterClass;
         }
 
         /// <summary>
