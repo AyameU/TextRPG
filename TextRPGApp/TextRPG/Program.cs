@@ -16,7 +16,7 @@ namespace TextRPG
         /// </summary>
         static void StartGame()
         {
-            string command = "";
+            string command;
 
             while (true)
             {
@@ -29,13 +29,13 @@ namespace TextRPG
 
                 if (command == "x" ||  command == "X")
                 {
-                    System.Environment.Exit(0);
+                    Environment.Exit(0);
                 }
                 else
                 {
-                    Hero hero = Program.NewHero();
+                    Hero hero = NewHero();
 
-                    Console.WriteLine("Your hero:");
+                    Console.WriteLine("\nYour hero:");
                     Console.WriteLine(hero + "\n");
                 }
             }
@@ -50,7 +50,24 @@ namespace TextRPG
 
             Console.WriteLine("\nIs your character female or male? Press 0 for female or 1 for male.");
             input = Console.ReadLine();
-            Gender gender = (Gender) Int32.Parse(input);
+            Gender gender = Gender.Female;
+
+            try
+            {
+                gender = ValidateGender(input);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Console.WriteLine("You must choose 0 or 1.");
+                Console.WriteLine("\nIs your character female or male? Press 0 for female or 1 for male.");
+                input = Console.ReadLine();
+            }
+            catch (ArgumentNullException)
+            {
+                Console.WriteLine("The value cannot be empty");
+                Console.WriteLine("\nIs your character female or male? Press 0 for female or 1 for male.");
+                input = Console.ReadLine();
+            }
 
             Console.WriteLine("\nChoose a race: Human, Elf or Dwarf.");
             input = Console.ReadLine();
@@ -71,24 +88,32 @@ namespace TextRPG
             return hero;
         }
 
-        /*
-        static Gender SetGender(string input)
+        /// <summary>
+        /// Validates the character gender.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns>The specified gender.</returns>
+        static Gender ValidateGender(string input)
         {
-            Gender gender;
+            int num = Int32.Parse(input);
 
-            switch (input)
+            if (num < 0 || num > 1)
             {
-                case "female":
-                    gender = Gender.Female;
-                    break;
-                case "male":
-                    gender = Gender.Male;
-                    break;
+                throw new ArgumentOutOfRangeException("The input must be 0 or 1.");
             }
+            if(input is null)
+            {
+                throw new ArgumentNullException("The input cannot be null.");
+            }
+            else
+            {
+                Gender gender = num == 0 ? Gender.Female : Gender.Male;
 
-            return gender;
+                return gender;
+            }
         }
 
+        /*
         static Race SetRace(string input)
         {
             Race race;

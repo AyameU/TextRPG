@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Character.cs" />
-    <Compile Include="CharClass.cs" />
+    <Compile Include="CharacterClass.cs" />
     <Compile Include="Hero.cs" />
     <Compile Include="Gender.cs" />
     <Compile Include="Program.cs" />
