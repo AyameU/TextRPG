@@ -3,10 +3,19 @@ using System.ComponentModel;
 
 namespace TextRPG
 {
+    /// <summary>
+    /// Represents the main hero character of the story.
+    /// </summary>
     public class Hero : Character
     {
         private CharClass charClass;
 
+        /// <summary>
+        /// Gets and sets the hero's class.
+        /// </summary>
+        /// <exception cref="InvalidEnumArgumentException">
+        /// Occurs when the value is not a valid enumeration.
+        /// </exception>
         public CharClass ClassChosen
         {
             get
@@ -14,7 +23,7 @@ namespace TextRPG
                 return this.charClass;
             }
 
-            set
+            private set
             {
                 if (!Enum.IsDefined(typeof(CharClass), value))
                 {

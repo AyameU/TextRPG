@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents the character class.
     /// </summary>
-    public enum CharClass
+    public enum CharacterClass
     {
         /// <summary>
         /// Represents the warrior class.

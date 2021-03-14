@@ -64,7 +64,7 @@ namespace TextRPG
 
             Console.WriteLine("\nChoose a class: Warrior, Mage, Rogue or Cleric. ");
             input = Console.ReadLine();
-            CharClass charClass = (CharClass)Int32.Parse(input);
+            CharacterClass charClass = (CharacterClass)Int32.Parse(input);
 
             Hero hero = new Hero(gender, race, name, hitPoints, charClass);
 
