@@ -8,7 +8,7 @@ namespace TextRPG
     /// </summary>
     public class Hero : Character
     {
-        private CharClass charClass;
+        private CharacterClass charClass;
 
         /// <summary>
         /// Gets and sets the hero's class.
@@ -16,7 +16,7 @@ namespace TextRPG
         /// <exception cref="InvalidEnumArgumentException">
         /// Occurs when the value is not a valid enumeration.
         /// </exception>
-        public CharClass ClassChosen
+        public CharacterClass ClassChosen
         {
             get
             {
@@ -25,7 +25,7 @@ namespace TextRPG
 
             private set
             {
-                if (!Enum.IsDefined(typeof(CharClass), value))
+                if (!Enum.IsDefined(typeof(CharacterClass), value))
                 {
                     throw new InvalidEnumArgumentException("The value is not a valid enumeration.");
                 }
@@ -38,7 +38,7 @@ namespace TextRPG
         /// Initializes a hero character with the specified gender, race, name, class 
         /// and with hit points set to 50.
         /// </summary>
-        public Hero(Gender genderChosen, Race raceChosen, string name, CharClass charClass) 
+        public Hero(Gender genderChosen, Race raceChosen, string name, CharacterClass charClass) 
             : base(genderChosen, raceChosen, name)
         {
             this.GenderChosen = genderChosen;
@@ -51,7 +51,7 @@ namespace TextRPG
         /// Initializes a hero character with the specified gender, race, name, class 
         /// and hit points.
         /// </summary>
-        public Hero(Gender genderChosen, Race raceChosen, string name, int hitPoints, CharClass charClass)
+        public Hero(Gender genderChosen, Race raceChosen, string name, int hitPoints, CharacterClass charClass)
             : base(genderChosen, raceChosen, name, hitPoints)
         {
             this.GenderChosen = genderChosen;
@@ -62,9 +62,11 @@ namespace TextRPG
         }
 
         /// <summary>
-        /// Returns a string representation of the hero.
+        /// Returns a string representation of the hero's name, gender, race and class.
         /// </summary>
-        /// <returns>A string representation of the hero.</returns>
+        /// <returns>
+        /// A string representation of the hero's name, gender, race and class.
+        /// </returns>
         public override string ToString()
         {
             return this.Name + " is a " 
