@@ -23,7 +23,7 @@ namespace TextRPG
                 return this.characterClass;
             }
 
-            private set
+            set
             {
                 if (!Enum.IsDefined(typeof(CharacterClass), value))
                 {
@@ -32,6 +32,13 @@ namespace TextRPG
 
                 this.characterClass = value;
             }
+        }
+
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public Hero()
+        {
         }
 
         /// <summary>

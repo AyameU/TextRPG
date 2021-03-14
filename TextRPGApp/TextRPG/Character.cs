@@ -20,7 +20,7 @@ namespace TextRPG
         /// <summary>
         /// Gets and sets the character name.
         /// </summary>
-        protected string Name
+        public string Name
         {
             get;
             set;
@@ -32,7 +32,7 @@ namespace TextRPG
         /// <exception cref="InvalidEnumArgumentException">
         /// Occurs when the enumerator is not valid.
         /// </exception>
-        protected Gender GenderChosen
+        public Gender GenderChosen
         {
             get
             {
@@ -56,7 +56,7 @@ namespace TextRPG
         /// <exception cref="InvalidEnumArgumentException">
         /// Occurs when the enumerator is not valid. 
         /// </exception>
-        protected Race RaceChosen
+        public Race RaceChosen
         {
             get
             {
@@ -78,9 +78,10 @@ namespace TextRPG
         /// Gets and sets the character's hit points.
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// Occurs when the hit points are set to a value less than or equal to 0.
+        /// Occurs when the hit points are set to a value less than or equal to 0,
+        /// or the value is greater than 100.
         /// </exception>
-        protected int HitPoints
+        public int HitPoints
         {
             get
             {
@@ -93,9 +94,20 @@ namespace TextRPG
                 {
                     throw new ArgumentOutOfRangeException("The value cannot be less than or equal to 0.");
                 }
+                if(value > 100)
+                {
+                    throw new ArgumentOutOfRangeException("The value cannot be greater than 100.");
+                }
 
                 this.hitPoints = value;
             }
+        }
+
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public Character()
+        {
         }
 
         /// <summary>
