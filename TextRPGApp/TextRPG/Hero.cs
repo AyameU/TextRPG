@@ -52,20 +52,7 @@ namespace TextRPG
             this.RaceChosen = raceChosen;
             this.Name = name;
             this.ClassChosen = characterClass;
-        }
-
-        /// <summary>
-        /// Initializes a hero character with the specified gender, race, name, class 
-        /// and hit points.
-        /// </summary>
-        public Hero(Gender genderChosen, Race raceChosen, string name, int hitPoints, CharacterClass characterClass)
-            : base(genderChosen, raceChosen, name, hitPoints)
-        {
-            this.GenderChosen = genderChosen;
-            this.RaceChosen = raceChosen;
-            this.Name = name;
-            this.HitPoints = hitPoints;
-            this.ClassChosen = characterClass;
+            this.HitPoints = 50;
         }
 
         /// <summary>
@@ -76,10 +63,12 @@ namespace TextRPG
         /// </returns>
         public override string ToString()
         {
-            return this.Name + " is a " 
-                + this.GenderChosen + " " 
-                + this.RaceChosen + " " 
-                + this.ClassChosen;
+            return string.Format("{0} is a {1} {2} {3} with {4} hit points.",
+                                 this.Name, 
+                                 this.GenderChosen, 
+                                 this.RaceChosen, 
+                                 this.ClassChosen, 
+                                 this.HitPoints);
         }
     }
 }

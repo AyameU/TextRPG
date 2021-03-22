@@ -10,7 +10,6 @@ namespace TextRPG
     {
         private Gender genderChosen;
         private Race raceChosen;
-        private int hitPoints;
 
         /// <summary>
         /// Occurs when the character's hit points are less than or equal to zero.
@@ -77,37 +76,18 @@ namespace TextRPG
         /// <summary>
         /// Gets and sets the character's hit points.
         /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Occurs when the hit points are set to a value less than or equal to 0,
-        /// or the value is greater than 100.
-        /// </exception>
         public int HitPoints
         {
-            get
-            {
-                return this.hitPoints;
-            }
-
-            set
-            {
-                if(value <= 0)
-                {
-                    throw new ArgumentOutOfRangeException("The value cannot be less than or equal to 0.");
-                }
-                if(value > 100)
-                {
-                    throw new ArgumentOutOfRangeException("The value cannot be greater than 100.");
-                }
-
-                this.hitPoints = value;
-            }
+            get;
+            set;
         }
 
         /// <summary>
-        /// Default constructor.
+        /// Default constructor, with hit points set to 50.
         /// </summary>
         public Character()
         {
+            this.HitPoints = 50;
         }
 
         /// <summary>
@@ -122,22 +102,7 @@ namespace TextRPG
             this.GenderChosen = genderChosen;
             this.RaceChosen = raceChosen;
             this.Name = name;
-            this.hitPoints = 50;
-        }
-
-        /// <summary>
-        /// Initializes the character with the specified gender, race, name
-        /// and hit points.
-        /// </summary>
-        /// <param name="genderChosen">The character's gender.</param>
-        /// <param name="raceChosen">The character's race.</param>
-        /// <param name="name">The character's name.</param>
-        public Character(Gender genderChosen, Race raceChosen, string name, int hitPoints)
-        {
-            this.GenderChosen = genderChosen;
-            this.RaceChosen = raceChosen;
-            this.Name = name;
-            this.HitPoints = hitPoints;
+            this.HitPoints = 50;
         }
 
         /// <summary>
@@ -148,9 +113,11 @@ namespace TextRPG
         /// </returns>
         public override string ToString()
         {
-            return this.Name + " is a " 
-                + this.GenderChosen + " " 
-                + this.RaceChosen;
+            return string.Format("{0} is a {1} {2} with {3} hit points.",
+                                 this.Name,
+                                 this.GenderChosen,
+                                 this.RaceChosen,
+                                 this.HitPoints);
         }
 
         /// <summary>
@@ -158,9 +125,9 @@ namespace TextRPG
         /// </summary>
         protected virtual void OnCharacterDeath()
         {
-            if (CharacterDeath != null)
+            if (this.CharacterDeath != null)
             {
-                CharacterDeath(this, new EventArgs());
+                this.CharacterDeath(this, new EventArgs());
             }
         }
     }

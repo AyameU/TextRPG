@@ -21,7 +21,8 @@ namespace TextRPG
 
             while (true)
             {
-                string menu = "\tN - Start New Game\n" + "\tX - Close Program\n";
+                string menu = "\tN - Start New Game\n" 
+                            + "\tX - Close Program\n";
 
                 Console.WriteLine("Type one of the commands below to start.");
                 Console.Write(menu);
@@ -32,12 +33,12 @@ namespace TextRPG
                 {
                     Environment.Exit(0);
                 }
-                else
+                if(command.ToLower().Equals("n"))
                 {
                     Hero hero = NewHero();
 
                     Console.WriteLine("\nYour hero:");
-                    Console.WriteLine(hero + "\n");
+                    Console.WriteLine(hero.ToString() + "\n");
                 }
             }
         }
@@ -48,8 +49,9 @@ namespace TextRPG
         static Hero NewHero()
         {
             Hero hero = new Hero();
+
             string input;
-            string errorMessage = string.Empty;
+            string errorMessage;
 
             do
             {
@@ -143,19 +145,6 @@ namespace TextRPG
                 }
             }
             while (!errorMessage.Equals(string.Empty));
-
-            /*
-            Console.WriteLine("\nSet your character's hit points. Choose a value between 1 and 100.");
-
-            try
-            {
-                hero.HitPoints = Int32.Parse(Console.ReadLine());
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                Console.WriteLine("The value must be between 1 and 100.");
-            }
-            */
 
             return hero;
         }
