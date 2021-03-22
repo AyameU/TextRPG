@@ -28,7 +28,7 @@ namespace TextRPG
                 Console.Write("\nCommand: ");
                 command = Console.ReadLine();
 
-                if (command == "x" ||  command == "X")
+                if (command.ToLower().Equals("x"))
                 {
                     Environment.Exit(0);
                 }
@@ -49,34 +49,102 @@ namespace TextRPG
         {
             Hero hero = new Hero();
             string input;
+            string errorMessage = string.Empty;
 
-            Console.WriteLine("\nIs your character female or male? Press 0 for female or 1 for male.");
-            input = Console.ReadLine();
+            do
+            {
+                // Reset the error message.
+                errorMessage = string.Empty;
 
-            try
-            {
-                hero.GenderChosen = (Gender)Int32.Parse(input);
-            }
-            catch (InvalidEnumArgumentException)
-            {
-                Console.WriteLine("You must choose 0 or 1.");
-            }
+                Console.WriteLine("\nIs your character female or male? Press 0 for female or 1 for male.");
+                input = Console.ReadLine();
 
-            Console.WriteLine("\nChoose a race: Human (0), Elf (1) or Dwarf (2).");
-            input = Console.ReadLine();
+                try
+                {
+                    hero.GenderChosen = (Gender)Int32.Parse(input);
+                }
+                catch (InvalidEnumArgumentException)
+                {
+                    errorMessage = "Invalid number. You must choose 0 or 1.";
+                    Console.WriteLine(errorMessage);
+                }
+                catch (FormatException)
+                {
+                    errorMessage = "Invalid character. You must choose 0 or 1.";
+                    Console.WriteLine(errorMessage);
+                }
 
-            try
-            {
-                hero.RaceChosen = (Race)Int32.Parse(input);
+                if (errorMessage.Equals(string.Empty))
+                {
+                    break;
+                }
             }
-            catch (InvalidEnumArgumentException)
+            while (!errorMessage.Equals(string.Empty));
+
+            do
             {
-                Console.WriteLine("You must choose 0, 1 or 2.");
+                // Reset the error message.
+                errorMessage = string.Empty;
+
+                Console.WriteLine("\nChoose a race: Human (0), Elf (1) or Dwarf (2).");
+                input = Console.ReadLine();
+
+                try
+                {
+                    hero.RaceChosen = (Race)Int32.Parse(input);
+                }
+                catch (InvalidEnumArgumentException)
+                {
+                    errorMessage = "You must choose 0, 1 or 2.";
+                    Console.WriteLine(errorMessage);
+                }
+                catch (FormatException)
+                {
+                    errorMessage = "Invalid character. You must choose 0, 1 or 2.";
+                    Console.WriteLine(errorMessage);
+                }
+
+                if (errorMessage.Equals(string.Empty))
+                {
+                    break;
+                }
             }
+            while (!errorMessage.Equals(string.Empty));
 
             Console.WriteLine("\nChoose your character's name.");
             hero.Name = Console.ReadLine();
 
+            do
+            {
+                // Reset the error message.
+                errorMessage = string.Empty;
+
+                Console.WriteLine("\nChoose a class: Warrior (0), Mage (1), Rogue (2) or Cleric (3). ");
+                input = Console.ReadLine();
+
+                try
+                {
+                    hero.ClassChosen = (CharacterClass)Int32.Parse(input);
+                }
+                catch (InvalidEnumArgumentException)
+                {
+                    errorMessage = "The value must be 0, 1, 2 or 3.";
+                    Console.WriteLine(errorMessage);
+                }
+                catch (FormatException)
+                {
+                    errorMessage = "Invalid character. You must choose 0, 1, 2 or 3.";
+                    Console.WriteLine(errorMessage);
+                }
+
+                if (errorMessage.Equals(string.Empty))
+                {
+                    break;
+                }
+            }
+            while (!errorMessage.Equals(string.Empty));
+
+            /*
             Console.WriteLine("\nSet your character's hit points. Choose a value between 1 and 100.");
 
             try
@@ -87,18 +155,7 @@ namespace TextRPG
             {
                 Console.WriteLine("The value must be between 1 and 100.");
             }
-
-            Console.WriteLine("\nChoose a class: Warrior (0), Mage (1), Rogue (2) or Cleric (3). ");
-            input = Console.ReadLine();
-
-            try
-            {
-                hero.ClassChosen = (CharacterClass)Int32.Parse(input);
-            }
-            catch (InvalidEnumArgumentException)
-            {
-                Console.WriteLine("The value must be 0, 1, 2 or 3.");
-            }
+            */
 
             return hero;
         }
