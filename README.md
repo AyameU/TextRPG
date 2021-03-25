@@ -17,3 +17,5 @@ Things work so far, but here's a list of things I should implement:
 * Duplicate code in the do-while loops of the character creation screen, should be rewritten.
 * A lot of code in the Program.cs file that really should go in its own class.
 * I could turn this into a WinForms app, now that I'm learning it.
+
+**Update 5 - Mar. 25** - Rewrote some of my longer blocks of code in Program.cs into smaller, more reusable methods. For example, I now have a PromptUserForInput() method that prompts the user for input. This cut down on a lot of duplicate code. The main method now consists of just one line of code to show the main menu.
