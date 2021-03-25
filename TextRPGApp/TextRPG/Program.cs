@@ -7,39 +7,78 @@ namespace TextRPG
     {
         static void Main(string[] args)
         {
-            Program.StartGame();
-
+            Program.StartProgram();
             Console.ReadKey();
         }
 
         /// <summary>
         /// Starts the game 
         /// </summary>
-        static void StartGame()
+        static void StartProgram()
         {
-            string command;
+            MainMenu();
+        }
+
+        /// <summary>
+        /// Shows the main menu and prompts the user for a command. 
+        /// </summary>
+        static void MainMenu()
+        {
+            string menu = "\t[N] - Start New Game\n"
+                            + "\t[X] - Close Program\n";
 
             while (true)
             {
-                string menu = "\tN - Start New Game\n" 
-                            + "\tX - Close Program\n";
-
                 Console.WriteLine("Type one of the commands below to start.");
                 Console.Write(menu);
-                Console.Write("\nCommand: ");
-                command = Console.ReadLine();
+                string command = PromptForUserInput();
 
-                if (command.ToLower().Equals("x"))
+                if (command.Equals("x"))
                 {
                     Environment.Exit(0);
                 }
-                if(command.ToLower().Equals("n"))
+                if (command.Equals("n"))
                 {
-                    Hero hero = NewHero();
-
-                    Console.WriteLine("\nYour hero:");
-                    Console.WriteLine(hero.ToString() + "\n");
+                    CreateNewCharacter();
                 }
+            } 
+        }
+
+        /// <summary>
+        /// Prompts the user to enter a command.
+        /// </summary>
+        /// <returns>The user's input.</returns>
+        static string PromptForUserInput()
+        {
+            string command;
+
+            Console.Write("\nCommand: ");
+            command = Console.ReadLine().ToLower();
+
+            return command;
+        }
+
+        /// <summary>
+        /// Starts the character creation process for a new character.
+        /// </summary>
+        static void CreateNewCharacter()
+        {
+            Hero hero = NewHero();
+
+            Console.WriteLine("\nYour hero:");
+            Console.WriteLine(hero.ToString() + "\n");
+
+            Console.WriteLine("\nAre you happy with your choices?");
+            Console.WriteLine("\nPress [Y] to start the game. Or [N] to go back to the menu.");
+            string command = PromptForUserInput();
+
+            if (command.Equals("y"))
+            {
+                // Start game
+            }
+            else
+            {
+                MainMenu();
             }
         }
 
@@ -59,7 +98,7 @@ namespace TextRPG
                 errorMessage = string.Empty;
 
                 Console.WriteLine("\nIs your character female or male? Press 0 for female or 1 for male.");
-                input = Console.ReadLine();
+                input = PromptForUserInput();
 
                 try
                 {
@@ -89,7 +128,7 @@ namespace TextRPG
                 errorMessage = string.Empty;
 
                 Console.WriteLine("\nChoose a race: Human (0), Elf (1) or Dwarf (2).");
-                input = Console.ReadLine();
+                input = PromptForUserInput();
 
                 try
                 {
@@ -114,7 +153,7 @@ namespace TextRPG
             while (!errorMessage.Equals(string.Empty));
 
             Console.WriteLine("\nChoose your character's name.");
-            hero.Name = Console.ReadLine();
+            hero.Name = PromptForUserInput();
 
             do
             {
@@ -122,7 +161,7 @@ namespace TextRPG
                 errorMessage = string.Empty;
 
                 Console.WriteLine("\nChoose a class: Warrior (0), Mage (1), Rogue (2) or Cleric (3). ");
-                input = Console.ReadLine();
+                input = PromptForUserInput();
 
                 try
                 {
